@@ -1,11 +1,11 @@
 {
 
-    "system_prompt": "You are an assistant that writes up reports following round table discussions in good, clear, British English.",
+    "system_prompt": "You are an assistant that writes in good, clear, British English.",
 
-    "summarisation_prompt": "This roundtable discussion is a conversation between several experts in the data science and generative AI field. The format is that everyone reads a specific academic paper prior to the roundtable meeting and then they discuss the paper. The abstract of the paper is delimited with #### characters and a transcription of the conversation had during the roundtable is delimited with $$$$ characters. The transcription has been stripped such that unimportant parts of speech such as conjunctions and particles have been removed. Write a summary on the paper and point-of-view from discussion using the provided transcript and the abstract of the paper. Make this a total lenght of 200 words #### {abstract} #### $$$$ {transcript} $$$$",
+    "summarisation_prompt": "Summarize the research paper and the conversation based on the provided abstract (delimited with #### characters) and transcription (delimited with $$$$ characters). Include key findings, insights, and perspectives shared during the discussion. Make this no longer than 200 words. #### {abstract} #### $$$$ {transcript} $$$$",
 
-    "talking_points_prompt": "Using the transcriptition and abstract from before, write a list of discussion points that summarise what was discussed and any conclusions. Make this 200-words long in total",
+    "talking_points_prompt": "From the transcription and abstract generate a list of main conversation points discussed during the roundtable session based on the transcription. Include key topics, arguments, and opinions presented in relation to the research paper. Provide some contextual details to elucidate the essence of each discussion point. Make this no longer than 200 words",
 
-    "areas_to_investigate_prompt": "Again, using the transcript and abstract from before. In 200 words, outline potential future subject areas to investigate based on what was mentioned in the transcript."
+    "areas_to_investigate_prompt": "Again, using the transcription and abstract from before as well as any of your insight. In 200 words, outline potential future subject areas to investigate."
 
 }
