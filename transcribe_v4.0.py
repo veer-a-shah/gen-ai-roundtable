@@ -1,6 +1,6 @@
 #Setting audio file, document and abstract location. EDIT THIS
 audio_file_location = "C:/Code/GenAI_Roundtable/Recordings/roundtable-1.m4a"
-document_name = "Session 1"
+document_name = "Session 1.docx"
 abstract_location = "abstract.txt"
 
 #Importing required libraries
@@ -43,7 +43,7 @@ audio_file = AudioSegment.from_file(audio_file_location, format="m4a")
 ten_minutes = 10 * 60 * 1000
 
 #Just using the first 10 minutes
-#audio_file = audio_file[:ten_minutes]
+audio_file = audio_file[:ten_minutes]
 
 #Dividing audiofile into chunks
 chunks = make_chunks(audio_file, ten_minutes)
