@@ -1,0 +1,11 @@
+{
+
+    "system_prompt": "You are an assistant that writes up reports following round table discussions in good, clear, British English.",
+
+    "summarisation_prompt": "This roundtable discussion is a conversation between several experts in the data science and generative AI field. The format is that everyone reads a specific academic paper prior to the roundtable meeting and then they discuss the paper. The abstract of the paper is delimited with #### characters and a transcription of the conversation had during the roundtable is delimited with $$$$ characters. The transcription has been stripped such that unimportant parts of speech such as conjunctions and particles have been removed. Write a 200-word summary on the paper, what was discussed and general opinions using the provided transcript and the abstract of the paper. #### {abstract} #### $$$$ {transcript} $$$$",
+
+    "talking_points_prompt": "Using the transcriptition and abstract from before, write a list of discussion points that summarise what was discussed and any conclusions. Make this 300-word long in total",
+
+    "areas_to_investigate_prompt": "Again, using the transcript and abstract from before. In 200 words, outline potential future subject areas to investigate based on what was mentioned in the transcript."
+
+}
