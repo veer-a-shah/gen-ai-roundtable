@@ -1,6 +1,6 @@
 #Setting audio file, document and abstract location. EDIT THIS
-audio_file_location = "C:/Code/GenAI_Roundtable/Recordings/roundtable-1.m4a"
-document_name = "Session 1.docx"
+audio_file_location = "C:/Code/gen-ai-roundtable/Recordings/Session 2 04-07-2023.m4a"
+document_name = "session_notes.docx"
 abstract_location = "abstract.txt"
 
 #Importing required libraries
@@ -43,7 +43,7 @@ audio_file = AudioSegment.from_file(audio_file_location, format="m4a")
 ten_minutes = 10 * 60 * 1000
 
 #Just using the first 10 minutes
-audio_file = audio_file[:ten_minutes]
+#audio_file = audio_file[:ten_minutes]
 
 #Dividing audiofile into chunks
 chunks = make_chunks(audio_file, ten_minutes)
@@ -148,15 +148,15 @@ def write_strings_to_word(summary, talking_points, alternatives, document_name):
     doc = Document()
 
     # Add string1 with a title
-    doc.add_heading("Summary:", level=1)
+    doc.add_heading("Summary:", level=2)
     doc.add_paragraph(summary)
 
     # Add string2 with a title
-    doc.add_heading("Talking Points:", level=1)
+    doc.add_heading("Talking Points:", level=2)
     doc.add_paragraph(talking_points)
 
     # Add string3 with a title
-    doc.add_heading("Alternative Areas to Investigate:", level=1)
+    doc.add_heading("Alternative Areas to Investigate:", level=2)
     doc.add_paragraph(alternatives)
 
     # Save the document
