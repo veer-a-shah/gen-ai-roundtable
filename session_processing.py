@@ -1,4 +1,4 @@
-#Setting audio file, document and abstract location. EDIT THIS
+#Setting audio file, document and abstract location. EDIT THIS 
 audio_file_location = "C:/Code/gen-ai-roundtable/Recordings/Session 2 04-07-2023.m4a"
 document_name = "session_notes.docx"
 abstract_location = "abstract.txt"
