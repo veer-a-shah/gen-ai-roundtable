@@ -1,5 +1,5 @@
 #Setting audio file, document and abstract location. EDIT THIS 
-audio_file_location = "C:/Code/gen-ai-roundtable/Recordings/Session 2 04-07-2023.m4a"
+audio_file_location = "/Users/veer.a.shah/Code/gen-ai-roundtable/Session 2 04-07-2023.m4a"
 document_name = "session_notes.docx"
 abstract_location = "abstract.txt"
 
@@ -41,12 +41,13 @@ audio_file = AudioSegment.from_file(audio_file_location, format="m4a")
 
 # PyDub handles time in milliseconds
 ten_minutes = 10 * 60 * 1000
+one_minute = 1 * 60 * 1000
 
 #Just using the first 10 minutes
-#audio_file = audio_file[:ten_minutes]
+audio_file = audio_file[:one_minute]
 
 #Dividing audiofile into chunks
-chunks = make_chunks(audio_file, ten_minutes)
+chunks = make_chunks(audio_file, one_minute)
 
 # Transcribe each chunk and perform diarization
 transcripts = []
@@ -64,9 +65,14 @@ for i, chunk in enumerate(chunks):
         chunk.export(temp_file_path, format="wav")
 
     # Transcribe audio from file
+    # with open(temp_file_path, mode='rb') as f:
+    #     response = openai.Audio.transcribe("whisper-1", file=f)
+    #     transcript = response['text']
+    #     transcripts.append(transcript)
+
+    # Transcribe audio from file
     with open(temp_file_path, mode='rb') as f:
-        response = openai.Audio.transcribe("whisper-1", file=f)
-        transcript = response['text']
+        transcript = openai.audio.transcriptions.create(model="whisper-1",file=f,response_format="text")
         transcripts.append(transcript)
 
     # Remove temporary file
@@ -105,31 +111,31 @@ areas_to_investigate_prompt = prompts["areas_to_investigate_prompt"]
 
 #Defning LLM processing functions
 def summary_func():
-    response = openai.ChatCompletion.create(
+    response = openai.chat.completions.create(
         model="gpt-4",
         messages=[{"role": "system", "content": system_prompt},
             {"role": "user", "content": summarisation_prompt}]
     )
-    summary = response["choices"][0]["message"]["content"]
+    summary = response.choices[0].message.content
     print("\n Summary: \n" + summary)
     return summary
 
 
 def talking_points_func(summary):
-    response = openai.ChatCompletion.create(
+    response = openai.chat.completions.create(
         model="gpt-4",
         messages=[{"role": "system", "content": system_prompt},
             {"role": "user", "content": summarisation_prompt},
             {"role": "assistant", "content": summary},
             {"role": "user", "content": talking_points_prompt}]
     )
-    talking_points = response["choices"][0]["message"]["content"]
+    talking_points = response.choices[0].message.content
     print("\n Talking points: \n" + talking_points)
     return talking_points
 
 
 def areas_to_investigate_func(summary, talking_points):
-    response = openai.ChatCompletion.create(
+    response = openai.chat.completions.create(
         model="gpt-4",
         messages=[{"role": "system", "content": system_prompt},
             {"role": "user", "content": summarisation_prompt},
@@ -138,7 +144,7 @@ def areas_to_investigate_func(summary, talking_points):
             {"role": "assistant", "content": talking_points},
             {"role": "user", "content": areas_to_investigate_prompt}]
     )
-    areas_to_investigate = response["choices"][0]["message"]["content"]
+    areas_to_investigate = response.choices[0].message.content
     print("\n Alternative areas to investigate: \n" + areas_to_investigate)
     return areas_to_investigate
 
