@@ -2,6 +2,7 @@
 audio_file_location = "/Users/veer.a.shah/Code/gen-ai-roundtable/Session 2 04-07-2023.m4a"
 document_name = "session_notes.docx"
 abstract_location = "abstract.txt"
+openai_model = "gpt-4-1106-preview"
 
 #Importing required libraries
 import openai
@@ -44,7 +45,7 @@ ten_minutes = 10 * 60 * 1000
 one_minute = 1 * 60 * 1000
 
 #Just using the first 10 minutes
-audio_file = audio_file[:one_minute]
+#audio_file = audio_file[:one_minute]
 
 #Dividing audiofile into chunks
 chunks = make_chunks(audio_file, one_minute)
@@ -112,7 +113,7 @@ areas_to_investigate_prompt = prompts["areas_to_investigate_prompt"]
 #Defning LLM processing functions
 def summary_func():
     response = openai.chat.completions.create(
-        model="gpt-4",
+        model=openai_model,
         messages=[{"role": "system", "content": system_prompt},
             {"role": "user", "content": summarisation_prompt}]
     )
@@ -123,7 +124,7 @@ def summary_func():
 
 def talking_points_func(summary):
     response = openai.chat.completions.create(
-        model="gpt-4",
+        model=openai_model,
         messages=[{"role": "system", "content": system_prompt},
             {"role": "user", "content": summarisation_prompt},
             {"role": "assistant", "content": summary},
@@ -136,7 +137,7 @@ def talking_points_func(summary):
 
 def areas_to_investigate_func(summary, talking_points):
     response = openai.chat.completions.create(
-        model="gpt-4",
+        model=openai_model,
         messages=[{"role": "system", "content": system_prompt},
             {"role": "user", "content": summarisation_prompt},
             {"role": "assistant", "content": summary},
